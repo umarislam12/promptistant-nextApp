@@ -17,30 +17,30 @@ const handler=NextAuth({
             session.user.id=sessionUser._id.toString();
             return session;
           },
-          async signIn({profile}){
-              try {
-                  //serverless route lambda->dynamodb
-                  await connectToDB()
-                  //check if user already exist
-                  const userExist=await User.findOne({
-                      email:profile.email
-                  })
-                  
-                  //if not create a new user
-                  if(!userExist){
-                      await User.create({
-                          email:profile.email,
-                          username:profile.name.replace(" ","".toLowerCase()),
-                          image:profile.picture
-                      })
-                  }
-                  return true
-              } catch (error) {
-                  console.log(error)
-      
-                  return false
-              }
-          }
+        async signIn({profile}){
+            try {
+                //serverless route lambda->dynamodb
+                await connectToDB()
+                //check if user already exist
+                const userExist=await User.findOne({
+                    email:profile.email
+                })
+                
+                //if not create a new user
+                if(!userExist){
+                    await User.create({
+                        email:profile.email,
+                        username:profile.name.replace(" ","".toLowerCase()),
+                        image:profile.picture
+                    })
+                }
+                return true
+            } catch (error) {
+                console.log(error)
+
+                return false
+            }
+        }
     }
     
 
