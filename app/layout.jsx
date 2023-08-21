@@ -1,4 +1,4 @@
-"use client"
+
 import '@Styles/globals.css'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
